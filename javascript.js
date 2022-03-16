@@ -32,7 +32,7 @@ function playRound(playerSelection, computerSelection) {
 
     // compare input selection and decide who wins round
     if (playerSelection === computerSelection) {
-        return `Draw ${playerSelection} is equivalent to ${computerSelection}`;
+        return `Draw! ${playerSelection} is equivalent to ${computerSelection}`;
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
         return `You win! ${playerSelection} beats ${computerSelection}`;
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
@@ -43,4 +43,50 @@ function playRound(playerSelection, computerSelection) {
         return `You lose! ${playerSelection} doesn't beat ${computerSelection}`;
     }
 }
+
 // game function plays a 5 round game to keep score and reports the winner and loser at the end of the 5 round game
+function game() {
+    
+    let playerScore = 0;
+    let computerScore = 0;
+
+    // for loop will be used to do a 5 round game and also keep score
+    for (let i = 0; i < 5; i++) {
+        // have the computer choose their input
+        const computerSelection = computerPlay();
+        // prompt user for their input
+        const playerChoice = prompt("Rock, paper, or scissors?");
+        // use player and computer choices and run a round of the game
+        // save output into results in order to determine the winner of the round
+        const results = playRound(playerChoice, computerSelection);
+        console.log(results);
+        
+        // the following conditional looks for keywords in the results output to determine the winner of the round and how to update the score accordingly
+        if (results.search(/draw/i) === -1) {
+            if (results.search(/win/i) !== -1) {
+                playerScore += 1;
+            } else {
+                computerScore += 1;
+            }
+        } else {
+            playerScore += 1;
+            computerScore += 1;
+        }
+
+        console.log(`Your score: ${playerScore}`);
+        console.log(`Computer score: ${computerScore}`);
+    }
+        // determine the winner of the game
+        if (playerScore > computerScore) {
+            console.log(`You win!`);
+        } else if (playerScore < computerScore) {
+            console.log(`You lose!`);
+        } else {
+            console.log(`It's a draw!`);
+        }
+}
+
+game();
+// const playerSelection = 'scissors';
+
+//console.log(playRound(playerSelection, computerSelection));
