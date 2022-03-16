@@ -59,6 +59,8 @@ function game() {
         // use player and computer choices and run a round of the game
         // save output into results in order to determine the winner of the round
         const results = playRound(playerChoice, computerSelection);
+
+        // display results
         console.log(results);
         
         // the following conditional looks for keywords in the results output to determine the winner of the round and how to update the score accordingly
@@ -73,20 +75,18 @@ function game() {
             computerScore += 1;
         }
 
+        // output the score count
         console.log(`Your score: ${playerScore}`);
         console.log(`Computer score: ${computerScore}`);
     }
-        // determine the winner of the game
-        if (playerScore > computerScore) {
-            console.log(`You win!`);
-        } else if (playerScore < computerScore) {
-            console.log(`You lose!`);
-        } else {
-            console.log(`It's a draw!`);
-        }
+    // determine the winner of the game
+    if (playerScore > computerScore) {
+        console.log(`You win!`);
+    } else if (playerScore < computerScore) {
+        console.log(`You lose!`);
+    } else {
+        console.log(`It's a draw!`);
+    }
 }
 
 game();
-// const playerSelection = 'scissors';
-
-//console.log(playRound(playerSelection, computerSelection));
