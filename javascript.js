@@ -45,6 +45,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // game function plays a 5 round game to keep score and reports the winner and loser at the end of the 5 round game
+/*
 function game() {
     
     let playerScore = 0;
@@ -88,5 +89,44 @@ function game() {
         console.log(`It's a draw!`);
     }
 }
+*/
 
-game();
+// game();
+
+// create a container for the buttons
+const body = document.querySelector('body');
+const container = document.createElement('div');
+
+container.classList.add('container');
+container.textContent = 'container';
+
+body.append(container);
+
+// create buttons
+const rockButton = document.createElement('button');
+const paperButton = document.createElement('button');
+const scissorsButton = document.createElement('button');
+
+// create class names for buttons
+rockButton.classList.add('rock');
+paperButton.classList.add('paper');
+scissorsButton.classList.add('scissors');
+
+// add text to buttons
+rockButton.textContent = 'Rock';
+paperButton.textContent = 'Paper';
+scissorsButton.textContent = 'Scissors';
+
+// append buttons onto container
+container.append(rockButton, paperButton, scissorsButton);
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        console.log(playRound(button.className, computerPlay()));
+    });
+});
+
+rockButton.addEventListener('click', () => {
+    console.log('rockBUTTON');
+})
