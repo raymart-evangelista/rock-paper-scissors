@@ -120,13 +120,20 @@ scissorsButton.textContent = 'Scissors';
 // append buttons onto container
 container.append(rockButton, paperButton, scissorsButton);
 
+// put buttons in a node list called buttons
 const buttons = document.querySelectorAll('button');
+
+// iterate through each button on the webpage
 buttons.forEach((button) => {
+
+    // when button is clicked, play a round of RPS and output to console
     button.addEventListener('click', () => {
         console.log(playRound(button.className, computerPlay()));
     });
 });
 
+/*
 rockButton.addEventListener('click', () => {
     console.log('rockBUTTON');
 })
+*/
