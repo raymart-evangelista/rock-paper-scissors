@@ -126,9 +126,9 @@ const buttons = document.querySelectorAll('button');
 // iterate through each button on the webpage
 buttons.forEach((button) => {
 
-    // when button is clicked, play a round of RPS and output to console
+    // when button is clicked, play a round of RPS and output to results div
     button.addEventListener('click', () => {
-        console.log(playRound(button.className, computerPlay()));
+        results.textContent = `${playRound(button.className, computerPlay())}`;
     });
 });
 
@@ -137,3 +137,7 @@ rockButton.addEventListener('click', () => {
     console.log('rockBUTTON');
 })
 */
+
+// add a div for displaying results and change console.logs into DOM methods
+const results = document.createElement('div');
+container.append(results);
