@@ -3,7 +3,7 @@
 function computerPlay() {
 
     // choose a random integer
-    let randInt = getRandInt(0,3);
+    let randInt = getRandInt(0, 3);
 
     // match randInt with corresponding rock, paper, or scissors value
     if (randInt == 0) {
@@ -34,12 +34,16 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return `Draw! ${playerSelection} is equivalent to ${computerSelection}`;
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+        playerScore += 1;
         return `You win! ${playerSelection} beats ${computerSelection}`;
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+        playerScore += 1;
         return `You win! ${playerSelection} beats ${computerSelection}`;
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+        playerScore += 1;
         return `You win! ${playerSelection} beats ${computerSelection}`;
     } else {
+        computerScore += 1;
         return `You lose! ${playerSelection} doesn't beat ${computerSelection}`;
     }
 }
@@ -47,23 +51,34 @@ function playRound(playerSelection, computerSelection) {
 // game function plays a 5 round game to keep score and reports the winner and loser at the end of the 5 round game
 /*
 function game() {
-    
+
+
+
+
     let playerScore = 0;
     let computerScore = 0;
 
+
     // for loop will be used to do a 5 round game and also keep score
     for (let i = 0; i < 5; i++) {
+
+        let buttonChoice;
+
         // have the computer choose their input
         const computerSelection = computerPlay();
         // prompt user for their input
-        const playerChoice = prompt("Rock, paper, or scissors?");
+
+        //const playerChoice = prompt("Rock, paper, or scissors?");
+
+
         // use player and computer choices and run a round of the game
         // save output into results in order to determine the winner of the round
-        const results = playRound(playerChoice, computerSelection);
+        // // const results = playRound(playerChoice, computerSelection);
 
         // display results
-        console.log(results);
-        
+        // // console.log(results);
+        roundResults.textContent = `${playRound(buttonChoice, computerPlay())}`;
+
         // the following conditional looks for keywords in the results output to determine the winner of the round and how to update the score accordingly
         if (results.search(/draw/i) === -1) {
             if (results.search(/win/i) !== -1) {
@@ -77,21 +92,26 @@ function game() {
         }
 
         // output the score count
-        console.log(`Your score: ${playerScore}`);
-        console.log(`Computer score: ${computerScore}`);
+        // console.log(`Your score: ${playerScore}`);
+        // console.log(`Computer score: ${computerScore}`);
+        playerResults.textContent = `Your score: ${playerScore}`;
+        computerResults.textContent = `Computer score: ${computerScore}`
+
     }
     // determine the winner of the game
     if (playerScore > computerScore) {
-        console.log(`You win!`);
+        // console.log(`You win!`);
+        winner.textContent = `You Win!`;
     } else if (playerScore < computerScore) {
-        console.log(`You lose!`);
+        // console.log(`You lose!`);
+        winner.textContent = `You Lose!`;
     } else {
-        console.log(`It's a draw!`);
+        // console.log(`It's a draw!`);
+        winner.textContent = `It's a draw!`;
     }
 }
-*/
 
-// game();
+*/
 
 // create a container for the buttons
 const body = document.querySelector('body');
@@ -123,14 +143,6 @@ container.append(rockButton, paperButton, scissorsButton);
 // put buttons in a node list called buttons
 const buttons = document.querySelectorAll('button');
 
-// iterate through each button on the webpage
-buttons.forEach((button) => {
-
-    // when button is clicked, play a round of RPS and output to results div
-    button.addEventListener('click', () => {
-        results.textContent = `${playRound(button.className, computerPlay())}`;
-    });
-});
 
 /*
 rockButton.addEventListener('click', () => {
@@ -139,5 +151,63 @@ rockButton.addEventListener('click', () => {
 */
 
 // add a div for displaying results and change console.logs into DOM methods
-const results = document.createElement('div');
-container.append(results);
+const displayInfo = document.createElement('div');
+// add elements for displaying certain info
+const roundResults = document.createElement('h1');
+const playerResults = document.createElement('h1');
+const computerResults = document.createElement('h1');
+const score = document.createElement('h1');
+const winner = document.createElement('h2');
+
+// append
+// displayInfo.append(roundResults);
+// displayInfo.append(playerResults);
+// displayInfo.append(computerResults);
+// displayInfo.append(score);
+// displayInfo.append(winner);
+
+container.append(displayInfo);
+container.append(winner);
+container.append(roundResults);
+container.append(playerResults);
+container.append(computerResults);
+container.append(score);
+
+
+
+
+// iterate through each button on the webpage
+buttons.forEach((button) => {
+
+    // when button is clicked, play a round of RPS and output to results div
+    button.addEventListener('click', () => {
+        // save click info for usage
+        // buttonChoice = button.className;
+
+
+
+        displayInfo.textContent = `${playRound(button.className, computerPlay())}`;
+
+        playerResults.textContent = `Player Score: ${playerScore}`;
+        computerResults.textContent = `Computer Score: ${computerScore}`;
+
+        if (playerScore === 5 || computerScore === 5) {
+            if (playerScore > computerScore) {
+                winner.textContent = `You Win!`;
+            } else {
+                winner.textContent = `You Lose!`;
+            }
+            playerScore = 0;
+            computerScore = 0;
+        }
+
+
+
+
+    });
+});
+
+// declare global vars that can be accessed everywhere
+let playerScore = 0;
+let computerScore = 0;
+
