@@ -199,6 +199,8 @@ buttons.forEach((button) => {
             }
             playerScore = 0;
             computerScore = 0;
+        } else {
+            winner.textContent = '';
         }
 
 
